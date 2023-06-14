@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html ng-app="itemDiet">
+<head>
+	<meta charset="utf-8">
+	<title>The Item Diet</title>
+	<script src="../angular.min.js"></script>
+	<script src="app.js"></script>
+	<style>
+		* { background: #fff; color: #000; }
+		.error { color: #900; font-weight: bold; }
+		.good { background: #cfc; }
+		.bad { background: #fcc; }
+		.good, .bad { padding: .75em; }
+		
+	</style>
+</head>
+
+<body>
+
+	<h1>The Item Diet</h1>
+
+	<div ng-controller="dietController">
+		<p>List what you usually have for lunch. Separate each item by a comma.
+		
+		<p>Examples: 
+		
+		<ul>
+			<li ng-click="fillField($event)">bean sprout, bean sprout, giant chocolate cake
+			<li ng-click="fillField($event)">pea, pea, pea, pea
+		</ul>
+
+		<div ng-show="hasError" class="error">Error: {{errorMsg}}</div>
+
+		<p><label for="items-field">Food items</label> <input type="text" ng-model="itemListString" id="items-field">
+
+		<p><button ng-click="checkIfTooMuch();">Check If Too Much</button>
+
+		<div ng-show="hasResult">
+			<p>You listed: 
+
+			<ul>
+				<li ng-repeat="item in items track by $index">{{item}}
+			</ul>
+			
+			<div class="{{resultType}}">{{resultMsg}}</div>
+		</div>
+	</div>
+
+</body>
+</html>
