@@ -13,7 +13,9 @@
 
 	<div ng-controller="calculatorController">
 
-		<p><label for="nameField">Person's name:</label> <input type="text" id="nameField" ng-model="name">
+		<p><label for="nameField">Person's name:</label> <input type="text" id="nameField" ng-model="name" ng-blur="upper()"> <small>(We will format the name as uppercase.)</small>
+		
+		<p>Name = {{name|uppercase}}.
 
 		<p>Total numeric value of person's name is: {{sum()}}
 	</div> <!-- /ng: calculatorController -->

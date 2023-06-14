@@ -1,10 +1,11 @@
 (function(){
 	'use strict';
 	
-	angular.module('nameCalculator', [])
+	angular.module('nameCalculator', []).controller('calculatorController', ['$scope', '$filter', calculatorController]); 
 	
-	.controller('calculatorController', function($scope) {
+	function calculatorController($scope, $filter) {
 		$scope.name = '';
+		
 		$scope.sum = function () {
 			var totalNameValue = 0;
 			
@@ -13,5 +14,10 @@
 			}
 			return totalNameValue;
 		}
-	});
+		
+		$scope.upper = function() {
+			var upCase = $filter('uppercase');
+			$scope.name = upCase($scope.name);
+		}
+	}
 })();
