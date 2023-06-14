@@ -1,22 +1,24 @@
 <!DOCTYPE html>
-<html ng-app="renameThisPlease">
+<html ng-app="nameCalculator">
 <head>
   <meta charset="utf-8">
-  <title>Hello Coursera</title>
+  <title>Name calculator</title>
 </head>
 
 <body>
 
-<h1>Hello Coursera studs</h1>
+	<h1>Name calculator</h1>
 
-<p>What is with all the attempts to upsell stuff in this course?
+	<p>What is with all the attempts to upsell stuff in this course?
 
-<div ng-controller="renameThisController">
-<input type="text" ng-model="name">
-<p>You wrote: {{name}}
-</div>
+	<div ng-controller="calculatorController">
 
-<script src="angular.min.js"></script>
-<script src="app.js"></script>
+		<p><label for="nameField">Person's name:</label> <input type="text" id="nameField" ng-model="name">
+
+		<p>Total numeric value of person's name is: {{sum()}}
+	</div> <!-- /ng: calculatorController -->
+
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
 </body>
 </html>

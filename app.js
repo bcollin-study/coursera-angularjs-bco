@@ -1,12 +1,17 @@
 (function(){
 	'use strict';
 	
-	angular.module('renameThisPlease', [])
+	angular.module('nameCalculator', [])
 	
-	.controller('renameThisController', function($scope) {
-		$scope.name = 'Branko';
-		$scope.sayHello = function () {
-			return "Hello studs!";
+	.controller('calculatorController', function($scope) {
+		$scope.name = '';
+		$scope.sum = function () {
+			var totalNameValue = 0;
+			
+			for (var i = 0; i < $scope.name.length; i++) {
+				totalNameValue += $scope.name.charCodeAt(i);
+			}
+			return totalNameValue;
 		}
 	});
 })();
