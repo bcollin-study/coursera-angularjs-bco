@@ -1,8 +1,9 @@
 (function(){
 	'use strict';
 	
-	angular.module('nameCalculator', []).controller('calculatorController', ['$scope', '$filter', calculatorController]); 
+	angular.module('nameCalculator', []).controller('calculatorController', calculatorController); 
 	
+	calculatorController.$inject = ['$scope', '$filter'];
 	function calculatorController($scope, $filter) {
 		$scope.name = '';
 		
