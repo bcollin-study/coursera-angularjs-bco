@@ -1,8 +1,10 @@
 <!DOCTYPE html>
 <html ng-app="nameCalculator">
 <head>
-  <meta charset="utf-8">
-  <title>Name calculator</title>
+	<meta charset="utf-8">
+	<title>Name calculator</title>
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
 </head>
 
 <body>
@@ -18,9 +20,11 @@
 		<p>Name = {{name|uppercase}}.
 
 		<p>Total numeric value of person's name is: {{sum()}}
+		
+		<p><button ng-click="lightToggle()">Light {{state_other}}</button>
+		
+		<p><img ng-src="assets/img/light_{{light_state}}.jpg" alt="Light {{light_state}}" width="200" height="200">
 	</div> <!-- /ng: calculatorController -->
 
-	<script src="angular.min.js"></script>
-	<script src="app.js"></script>
 </body>
 </html>
