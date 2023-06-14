@@ -3,7 +3,10 @@
 	
 	angular.module('renameThisPlease', [])
 	
-	.controller('renameThisController', function() {
-		
+	.controller('renameThisController', function($scope) {
+		$scope.name = 'Branko';
+		$scope.sayHello = function () {
+			return "Hello studs!";
+		}
 	});
 })();
