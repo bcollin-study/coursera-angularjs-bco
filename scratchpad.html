@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html ng-app="nameCalculator">
+<head>
+	<meta charset="utf-8">
+	<title>Name calculator</title>
+	<script src="angular.min.js"></script>
+	<script src="app.js"></script>
+</head>
+
+<body>
+
+	<h1>Name calculator</h1>
+
+	<p>What is with all the attempts to upsell stuff in this course?
+
+	<div ng-controller="calculatorController">
+
+		<p><label for="nameField">Person's name:</label> <input type="text" id="nameField" ng-model="name" ng-blur="upper()"> <small>(We will format the name as uppercase.)</small>
+		
+		<p>Name = {{name|uppercase}}.
+
+		<p>Total numeric value of person's name is: {{sum()}}
+		
+		<p><button ng-click="lightToggle()">Light {{state_other}}</button>
+		
+		<p><img ng-src="assets/img/light_{{light_state}}.jpg" alt="Light {{light_state}}" width="200" height="200">
+	</div> <!-- /ng: calculatorController -->
+
+</body>
+</html>

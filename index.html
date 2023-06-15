@@ -1,30 +1,26 @@
 <!DOCTYPE html>
-<html ng-app="nameCalculator">
+<html>
 <head>
 	<meta charset="utf-8">
 	<title>Name calculator</title>
-	<script src="angular.min.js"></script>
-	<script src="app.js"></script>
 </head>
 
 <body>
 
-	<h1>Name calculator</h1>
+	<div id="main">
 
-	<p>What is with all the attempts to upsell stuff in this course?
-
-	<div ng-controller="calculatorController">
-
-		<p><label for="nameField">Person's name:</label> <input type="text" id="nameField" ng-model="name" ng-blur="upper()"> <small>(We will format the name as uppercase.)</small>
+		<h1>Branko Collin's homework for Single Page Web Applications with AngularJS</h1>
 		
-		<p>Name = {{name|uppercase}}.
-
-		<p>Total numeric value of person's name is: {{sum()}}
+		<p><a href="scratchpad.html">Scratchpad.</a>
 		
-		<p><button ng-click="lightToggle()">Light {{state_other}}</button>
+		<h2>Assignments</h2>
 		
-		<p><img ng-src="assets/img/light_{{light_state}}.jpg" alt="Light {{light_state}}" width="200" height="200">
-	</div> <!-- /ng: calculatorController -->
+		<ul>
+			<li><a href="assignment-1">Assignment 1</a></li>
+			<!-- li><a href="assignment-">Assignment x</a></li -->
+		</ul>
+		
+	</div>
 
 </body>
 </html>
