@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 	
-	angular.module('itemDiet', []).controller('dietController', dietController); 
+	angular.module('LunchCheck', []).controller('LunchCheckController', dietController); 
 	
 	dietController.$inject = ['$scope'];
 	function dietController($scope) {
@@ -14,7 +14,7 @@
 		$scope.resultMsg = '';
 		
 		$scope.checkIfTooMuch = function() {
-			$scope.splitter();
+			$scope.items = splitter($scope.itemListString);
 
 			var sum = $scope.items.length;
 
@@ -30,7 +30,7 @@
 				$scope.hasResult = true;
 			}
 			
-			if (sum > 0 && sum < 4) {
+			if (sum < 4) {
 				$scope.resultType = 'good';
 				$scope.resultMsg = 'Enjoy!';				
 			}
@@ -41,13 +41,14 @@
 			}
 		}
 		
-		$scope.splitter = function () {
+		// Trim 'n' split a string.
+		function splitter(inString) {
 			var pattern = /\s*,\s*/g;
-			var trimmedListString = $scope.itemListString.replace(pattern, ',');
-			$scope.items = trimmedListString.split(',').filter(n => n);
-			console.log($scope.items);
+			var trimmedListString = inString.replace(pattern, ',');
+			return trimmedListString.split(',').filter(n => n);
 		}
 		
+		// Copy a sample value to the input field.
 		$scope.fillField = function(e) {
 			$scope.itemListString = e.target.innerText;
 		}

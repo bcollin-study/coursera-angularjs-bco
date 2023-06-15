@@ -1,16 +1,17 @@
 <!DOCTYPE html>
-<html ng-app="itemDiet">
+<html ng-app="LunchCheck">
 <head>
 	<meta charset="utf-8">
 	<title>The Item Diet</title>
 	<script src="../angular.min.js"></script>
 	<script src="app.js"></script>
 	<style>
-		* { background: #fff; color: #000; }
-		.error { color: #900; font-weight: bold; }
-		.good { background: #cfc; }
-		.bad { background: #fcc; }
-		.good, .bad { padding: .75em; }
+		*                        { background: #fff; color: #000; }
+		.error                   { color: #900; font-weight: bold; }
+		.placeholder-region.good { background: #cfc; }
+		.placeholder-region.bad  { background: #fcc; }
+		.good, 
+		.bad                     { padding: .75em; }
 		
 	</style>
 </head>
@@ -19,7 +20,7 @@
 
 	<h1>The Item Diet</h1>
 
-	<div ng-controller="dietController">
+	<div ng-controller="LunchCheckController">
 		<p>List what you usually have for lunch. Separate each item by a comma.
 		
 		<p>Examples: 
@@ -36,13 +37,15 @@
 		<p><button ng-click="checkIfTooMuch();">Check If Too Much</button>
 
 		<div ng-show="hasResult">
+			<div class="{{resultType}} placeholder-region">{{resultMsg}}</div>
+
 			<p>You listed: 
 
-			<ul>
+			<ol>
 				<li ng-repeat="item in items track by $index">{{item}}
-			</ul>
+			</ol>
 			
-			<div class="{{resultType}}">{{resultMsg}}</div>
+			<p>This diet works by eating 3 items or less.
 		</div>
 	</div>
 
