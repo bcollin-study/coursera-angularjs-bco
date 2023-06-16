@@ -1,10 +1,10 @@
 (function(){
 	'use strict';
 	
-	angular.module('nameCalculator', []).controller('calculatorController', calculatorController); 
+	angular.module('nameCalculator', []).controller('calculatorController', calculatorController).filter('space', spaceFilterFactory); 
 	
-	calculatorController.$inject = ['$scope', '$filter'];
-	function calculatorController($scope, $filter) {
+	calculatorController.$inject = ['$scope', '$filter', 'spaceFilter'];
+	function calculatorController($scope, $filter, spaceFilter) {
 		$scope.name = '';
 		$scope.light_state = 'off';
 		$scope.state_other = 'on';
@@ -36,6 +36,17 @@
 				$scope.light_state = 'on';
 				$scope.state_other = 'off';
 			}
+		}
+	}
+	
+	function spaceFilterFactory() {
+		return function(input) {
+			var out = '';
+			for (var i=0; i<input.length; i++) {
+				out += input[i];
+				out += ' ';
+			}
+			return out;
 		}
 	}
 })();
