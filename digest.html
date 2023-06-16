@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html ng-app="theApp">
+<head>
+  <meta charset="utf-8">
+  <title>Counters</title>
+  <script src="angular.min.js"></script>
+  <script src="digest.js"></script>  
+</head>
+
+<body ng-oninit="addVisitor()">
+
+<h1>The Digest Cycle</h1>
+
+<div ng-controller="theCounterController">
+	<div>Once-counter: {{onceCounter}} times.</div>
+
+	<button ng-click="multipleCounter()">Add 1</button>
+	
+	<p>Counter: {{counter}}
+	
+	<p><label for="name">???</label> <input id="name" type="text" ng-model="name">
+
+</div>
+
+</body>
+</html>
