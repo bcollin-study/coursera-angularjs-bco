@@ -8,9 +8,7 @@
 		$scope.name = '';
 		$scope.light_state = 'off';
 		$scope.state_other = 'on';
-		var costPerChar = .0085; // price of a character in USD.
 		$scope.cost = 0;
-		
 		
 		$scope.sum = function () {
 			var totalNameValue = 0;
@@ -19,7 +17,7 @@
 				totalNameValue += $scope.name.charCodeAt(i);
 			}
 			
-			$scope.cost = totalNameValue * costPerChar;
+			$scope.cost = totalNameValue * .0085;
 			return totalNameValue;
 		}
 		
@@ -40,11 +38,12 @@
 	}
 	
 	function spaceFilterFactory() {
-		return function(input) {
+		return function(input, symbol) {
 			var out = '';
+			if (undefined === symbol) { symbol = ' '; }
 			for (var i=0; i<input.length; i++) {
 				out += input[i];
-				out += ' ';
+				out += symbol;
 			}
 			return out;
 		}
