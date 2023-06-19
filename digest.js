@@ -4,8 +4,8 @@
 	angular.module('theApp', [])
 	.controller('theCounterController', theCounterController);
 	
-	theCounterController.$inject = ['$scope'];
-	function theCounterController($scope){
+	theCounterController.$inject = ['$scope', '$timeout'];
+	function theCounterController($scope, $timeout){
 		$scope.onceCounter = 1;
 		$scope.counter = 0;
 		$scope.name = 'say my name';
@@ -16,11 +16,9 @@
 		}
 		
 		$scope.multipleCounter = function() {
-			setTimeout(function(){
-				$scope.$apply(function(){
-					$scope.counter++;
-					console.log('counter incremented');		
-				});
+			$timeout(function(){
+				$scope.counter++;
+				console.log('counter incremented');		
 			}, 1000);
 		}
 		$scope.$watch(function(){
