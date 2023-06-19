@@ -9,8 +9,11 @@
 		$scope.onceCounter = 1;
 		$scope.counter = 0;
 		$scope.name = 'say my name';
+		$scope.oneway = 'potato';
+		$scope.onetime = 'fruit fly';
 
 		console.log($scope);
+		
 		var addVisitor =  function() {
 			$scope.visitorCount++;
 		}
@@ -21,6 +24,7 @@
 				console.log('counter incremented');		
 			}, 1000);
 		}
+		
 		$scope.$watch(function(){
 			console.log('Fired!');
 		});

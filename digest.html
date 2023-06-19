@@ -20,6 +20,16 @@
 	
 	<p><label for="name">???</label> <input id="name" type="text" ng-model="name">
 
+	<hr>
+	
+	<p>Two way binding: <input ng-model="counter" type="text">. <small>If you change this value (which is our Add 1 counter), these changes will be visible everywhere you use that value, i.e. in the counter.</small>
+	
+	<p>One way binding: <input value="{{oneway}}" type="text">. <small>If you change this, AngularJS won't know about it, e.g. will still print {{oneway}}.</small>
+	
+	<p>One time binding: <input ng-model="onetime" type="text"> 
+	<br>value: {{::onetime}}
+	<br><small></small>
+
 </div>
 
 </body>
