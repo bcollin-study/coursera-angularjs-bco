@@ -16,9 +16,13 @@
 		}
 		
 		$scope.multipleCounter = function() {
-			$scope.counter++;
+			setTimeout(function(){
+				$scope.$apply(function(){
+					$scope.counter++;
+					console.log('counter incremented');		
+				});
+			}, 1000);
 		}
-
 		$scope.$watch(function(){
 			console.log('Fired!');
 		});
