@@ -19,9 +19,13 @@
 		</ul>
 
 		<h2>List 2</h2>
+		<input type="text" ng-model="shoppingList2[0].qty">
 		<ul>
-			<li ng-repeat="item in shoppingList2">{{$index+1}}. {{item.name}} ({{item.qty}})
+			<li ng-repeat="item in shoppingList2">{{$index+1}}. Fetch  ({{item.qty}}) {{item.name}}{{multiplier(item.qty)}}
 		</ul>
+		
+		<p><label>Add item with qty 50</label> <input type="text" ng-model="newItem">
+		<p><button ng-click="addItem()">Add item</button>
 	</div>
 
 </body>
