@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html ng-app="shoppingList">
+<head>
+	<meta charset="utf-8">
+	<title>Shopping list</title>
+	<script src="angular.min.js"></script>
+	<script src="shopping-list.js"></script>
+</head>
+
+<body>
+
+	<h1>Shopping list</h1>
+
+	<div ng-controller="shoppingListController">
+		
+		<h2>List 1</h2>
+		<ul>
+			<li ng-repeat="item in shoppingList1">{{item}}
+		</ul>
+
+		<h2>List 2</h2>
+		<ul>
+			<li ng-repeat="item in shoppingList2">{{$index+1}}. {{item.name}} ({{item.qty}})
+		</ul>
+	</div>
+
+</body>
+</html>
