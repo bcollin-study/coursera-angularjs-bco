@@ -1,7 +1,7 @@
 (function(){
 	'use strict';
 
-	var shoppingList1 = ['apple', 'pear', 'strawberry'];
+	var shoppingList1 = ['apple', 'pear', 'strawberry', 'cherry', 'grape'];
 	
 	var shoppingList2 = [
 			{name: 'giant table', qty: '1'},
@@ -10,6 +10,21 @@
 			{name: 'knife', qty: '70'},
 			{name: 'plate', qty: '50'},
 		];
+
+	var numberList = [0,1,2,3,4,5,6,7,8,9];
+	
+	var removeSmallerThanFive = function(value) {
+		return value > 5;
+	}
+	
+	var searchValue = 'apple';
+	function containsFilter(value) {
+		return value.indexOf(searchValue) !== -1; 
+	}
+	
+	console.log(numberList.filter(removeSmallerThanFive));
+	
+	console.log('Filtered for ' + searchValue + ', product list = ', shoppingList1.filter(containsFilter));
 
 	angular.module('shoppingList', [])
 	.controller('shoppingListController', shoppingListController);

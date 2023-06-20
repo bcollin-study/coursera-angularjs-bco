@@ -15,11 +15,12 @@
 		
 		<h2>List 1</h2>
 		<ul>
-			<li ng-repeat="item in shoppingList1">{{item}}
+			<li ng-repeat="item in shoppingList1 | filter: filterFruit">{{item}}
 		</ul>
+		<p>List filter: <input type="text" ng-model="filterFruit">
 
 		<h2>List 2</h2>
-		<input type="text" ng-model="shoppingList2[0].qty">
+		<p>Change qty of first item: <input type="text" ng-model="shoppingList2[0].qty">
 		<ul>
 			<li ng-repeat="item in shoppingList2">{{$index+1}}. Fetch  ({{item.qty}}) {{item.name}}{{multiplier(item.qty)}}
 		</ul>
