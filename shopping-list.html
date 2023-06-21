@@ -2,14 +2,16 @@
 <html ng-app="shoppingList">
 <head>
 	<meta charset="utf-8">
-	<title>Shopping list</title>
+	<title>Shopping list and controllers</title>
 	<script src="angular.min.js"></script>
 	<script src="shopping-list.js"></script>
 </head>
 
 <body>
 
-	<h1>Shopping list</h1>
+	<h1>Lists and controllers</h1>
+
+	<h2>Shopping list</h2>
 
 	<div ng-controller="shoppingListController">
 		
@@ -29,5 +31,18 @@
 		<p><button ng-click="addItem()">Add item</button>
 	</div>
 
+	<h2>Nested controllers</h2>
+	
+	<div ng-controller="parentController as parent">
+		Parent value: {{parent.parentValue}}.
+	
+		<div ng-controller="child1Controller as child1">
+			Parent value: {{parent.parentValue}}.
+			Child value: {{child1.parentValue}}.
+		</div>
+		<div ng-controller="child2Controller">
+		</div>
+	</div>
+	
 </body>
 </html>

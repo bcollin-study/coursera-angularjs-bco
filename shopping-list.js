@@ -27,7 +27,10 @@
 	console.log('Filtered for ' + searchValue + ', product list = ', shoppingList1.filter(containsFilter));
 
 	angular.module('shoppingList', [])
-	.controller('shoppingListController', shoppingListController);
+	.controller('shoppingListController', shoppingListController)
+	.controller('parentController', parentController)
+	.controller('child1Controller', child1Controller)
+	.controller('child2Controller', child2Controller);
 	
 	shoppingListController.$inject = ['$scope'];
 	function shoppingListController($scope) {
@@ -47,5 +50,26 @@
 		}
 	}
 	
+	parentController.$inject = ['$scope'];
+	function parentController($scope) {
+		var parent = this;
+		$scope.parentValue = parent.parentValue = 5;
+		$scope.pc = this;
+		$scope.pc.parentValue = 3;
+	}
+	
+	child1Controller.$inject = ['$scope'];
+	function child1Controller($scope) {
+		var child1 = this;
+		console.log('$scope.parentValue: ', $scope.parentValue);
+		console.log('CHILD $scope', $scope);
+		$scope.pc.parentValue = 20;
+		$scope.parentValue = child1.parentValue = 30;
+		
+	}
+	
+	child2Controller.$inject = ['$scope'];
+	function child2Controller($scope) {
+	}
 	
 })()
