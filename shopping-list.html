@@ -2,51 +2,46 @@
 <html ng-app="shoppingList">
 <head>
 	<meta charset="utf-8">
-	<title>Shopping list and controllers</title>
+	<title>Service factories</title>
 	<script src="angular.min.js"></script>
 	<script src="shopping-list.js"></script>
 </head>
 
 <body>
 
-	<h1>Lists and controllers</h1>
+	<h1>Service factories</h1>
+	
+	<p>Multiple shopping lists require that data and logic should be kept in multiple services.
 
-	<h2>Shopping list</h2>
-
-	<div ng-controller="shoppingListController as list">
+	<div ng-controller="shoppingList1Controller as list1">
 		
-		<h2>List 1</h2>
+		<h2>Shopping list 1</h2>
+
 		<ul>
-			<li ng-repeat="item in list.shoppingList1 | filter: filterFruit">{{item}}
+			<li ng-repeat="item in list1.shoppingList | filter: filterItems">{{item.name}}{{list1.multiplier(item.qty)}} ({{item.qty}}) <button ng-click="list1.removeItem($index)">Delete</button>
 		</ul>
-		<p>List filter: <input type="text" ng-model="filterFruit">
+		<p>List filter: <input type="text" ng-model="filterItems">
+		<div class="msg">{{list1.errorMessage}}</div>
 
-		<h2>List 2</h2>
-		<ol>
-			<li ng-repeat="item in list.shoppingList2">Fetch ({{item.qty}}) {{item.name}}{{list.multiplier(item.qty)}} <button ng-click="list.removeItem($index)">Delete</button>
-		</ol>
-	</div>
-	<div ng-controller="shoppingListAddController as itemAdder">
-		<h3>Change quantity of first item</h3>
-		<p><label>New quantity</label> <input type="text" ng-model="itemAdder.firstQty" ng-keyup="setFirstQty()">
 		<h3>Add item</h3>
-		<p><label>Item</label> <input type="text" ng-model="itemAdder.newItem">
-		<p><label>Quantity</label> <input type="text" ng-model="itemAdder.newQty">
-		<p><button ng-click="itemAdder.addItem()">Add item</button>
+		<p><label>Item</label> <input type="text" ng-model="list1.newItem">
+		<p><label>Quantity</label> <input type="text" ng-model="list1.newQty">
+		<p><button ng-click="list1.addItem()">Add item</button>
 	</div>
 
-	<h2>Nested controllers</h2>
-	
-	<div ng-controller="parentController as parent">
-		Parent value: {{parent.parentValue}}.
-	
-		<div ng-controller="child1Controller as child1">
-			Parent value: {{parent.parentValue}}.
-			Child value: {{child1.parentValue}}.
-		</div>
-		<div ng-controller="child2Controller">
-		</div>
+	<div ng-controller="shoppingList2Controller as list2">
+		
+		<h2>Shopping list 2</h2>
+
+		<ol>
+			<li ng-repeat="item in list2.shoppingList">Fetch ({{item.qty}}) {{item.name}}{{list2.multiplier(item.qty)}} <button ng-click="list2.removeItem($index)">Delete</button>
+		</ol>
+
+		<h3>Add item</h3>
+		<p><label>Item</label> <input type="text" ng-model="list2.newItem">
+		<p><label>Quantity</label> <input type="text" ng-model="list2.newQty">
+		<p><button ng-click="list2.addItem()">Add item</button>
 	</div>
-	
+
 </body>
 </html>
