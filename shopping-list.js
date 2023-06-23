@@ -22,32 +22,93 @@
 		return value.indexOf(searchValue) !== -1; 
 	}
 	
+	function shoppingListService() {
+		var service = this;
+		var items = [];
+		
+		service.init = function() {
+			items = shoppingList2;
+		};
+		
+		service.addItem = function(item, qty) {
+			var item = {
+				name: item,
+				qty: qty
+			};
+			items.push(item);
+		};
+		
+		service.removeItem = function(idx) {
+			items.splice(idx, 1);
+		};
+		
+		service.getItems = function() {
+			return items;
+		};
+		
+		service.getItem = function(idx) {
+			return items[idx];
+		};
+		
+		service.setItem = function(idx, val) {
+			items[idx] = val;
+			console.log(items);
+		}
+	}
+	
 	console.log(numberList.filter(removeSmallerThanFive));
 	
 	console.log('Filtered for ' + searchValue + ', product list = ', shoppingList1.filter(containsFilter));
 
 	angular.module('shoppingList', [])
 	.controller('shoppingListController', shoppingListController)
+	.controller('shoppingListAddController', shoppingListAddController)
 	.controller('parentController', parentController)
 	.controller('child1Controller', child1Controller)
-	.controller('child2Controller', child2Controller);
+	.controller('child2Controller', child2Controller)
+	.service('shoppingListService', shoppingListService);
 	
-	shoppingListController.$inject = ['$scope'];
-	function shoppingListController($scope) {
-		$scope.shoppingList1 = shoppingList1;
-		$scope.shoppingList2 = shoppingList2;
-		$scope.newItem = '';
+	shoppingListController.$inject = ['shoppingListService'];
+	function shoppingListController(shoppingListService) {
+		var show = this;
 		
-		$scope.addItem = function(){
-			if ( $scope.newItem !== '') {
-				var count = $scope.shoppingList2.length;
-				$scope.shoppingList2[count] = { name: $scope.newItem, qty: 50 };
+		show.shoppingList1 = shoppingList1;
+		shoppingListService.init();
+		show.shoppingList2 = shoppingListService.getItems();
+		console.log('Initial shopping list: ', show.shoppingList2);
+		
+		show.multiplier = function(val) {
+			if (val > 1) { return 's'; }
+		};
+		
+		show.removeItem = function(idx) {
+			shoppingListService.removeItem(idx); 
+		};
+	}
+	
+	shoppingListAddController.$inject = ['shoppingListService'];
+	function shoppingListAddController(shoppingListService) {
+		console.log('Service: ', shoppingListService);
+		var ia = this;
+		
+		ia.newItem = '';
+		ia.newQty = '';
+		
+		ia.firstQty = shoppingListService.getItem(0).qty;
+		
+		ia.addItem = function(){
+			if ( ia.newItem !== '') {
+				if (ia.newQty === '') { ia.newQty = '1'; }
+				shoppingListService.addItem(ia.newItem, ia.newQty);
 			}
 		}
 		
-		$scope.multiplier = function(val) {
-			if (val > 1) { return 's'; }
+		ia.setFirstQty = function() {
+			item = shoppingListService.getItem(0);
+			item.qty = ia.firstQty;
+			shoppingListService.setItem(0, item);
 		}
+		
 	}
 	
 	parentController.$inject = ['$scope'];

@@ -13,22 +13,26 @@
 
 	<h2>Shopping list</h2>
 
-	<div ng-controller="shoppingListController">
+	<div ng-controller="shoppingListController as list">
 		
 		<h2>List 1</h2>
 		<ul>
-			<li ng-repeat="item in shoppingList1 | filter: filterFruit">{{item}}
+			<li ng-repeat="item in list.shoppingList1 | filter: filterFruit">{{item}}
 		</ul>
 		<p>List filter: <input type="text" ng-model="filterFruit">
 
 		<h2>List 2</h2>
-		<p>Change qty of first item: <input type="text" ng-model="shoppingList2[0].qty">
-		<ul>
-			<li ng-repeat="item in shoppingList2">{{$index+1}}. Fetch  ({{item.qty}}) {{item.name}}{{multiplier(item.qty)}}
-		</ul>
-		
-		<p><label>Add item with qty 50</label> <input type="text" ng-model="newItem">
-		<p><button ng-click="addItem()">Add item</button>
+		<ol>
+			<li ng-repeat="item in list.shoppingList2">Fetch ({{item.qty}}) {{item.name}}{{list.multiplier(item.qty)}} <button ng-click="list.removeItem($index)">Delete</button>
+		</ol>
+	</div>
+	<div ng-controller="shoppingListAddController as itemAdder">
+		<h3>Change quantity of first item</h3>
+		<p><label>New quantity</label> <input type="text" ng-model="itemAdder.firstQty" ng-keyup="setFirstQty()">
+		<h3>Add item</h3>
+		<p><label>Item</label> <input type="text" ng-model="itemAdder.newItem">
+		<p><label>Quantity</label> <input type="text" ng-model="itemAdder.newQty">
+		<p><button ng-click="itemAdder.addItem()">Add item</button>
 	</div>
 
 	<h2>Nested controllers</h2>
