@@ -2,45 +2,29 @@
 <html ng-app="shoppingList">
 <head>
 	<meta charset="utf-8">
-	<title>Service factories</title>
+	<title>Service providers</title>
 	<script src="angular.min.js"></script>
 	<script src="shopping-list.js"></script>
 </head>
 
 <body>
 
-	<h1>Service factories</h1>
+	<h1>Service providers</h1>
 	
-	<p>Multiple shopping lists require that data and logic should be kept in multiple services.
-
-	<div ng-controller="shoppingList1Controller as list1">
+	<div ng-controller="shoppingListController as list">
 		
-		<h2>Shopping list 1</h2>
+		<h2>Shopping list</h2>
 
 		<ul>
-			<li ng-repeat="item in list1.shoppingList | filter: filterItems">{{item.name}}{{list1.multiplier(item.qty)}} ({{item.qty}}) <button ng-click="list1.removeItem($index)">Delete</button>
+			<li ng-repeat="item in list.shoppingList | filter: filterItems">{{item.name}}{{list.multiplier(item.qty)}} ({{item.qty}}) <button ng-click="list.removeItem($index)">Delete</button>
 		</ul>
 		<p>List filter: <input type="text" ng-model="filterItems">
-		<div class="msg">{{list1.errorMessage}}</div>
+		<div class="msg">{{list.errorMessage}}</div>
 
 		<h3>Add item</h3>
-		<p><label>Item</label> <input type="text" ng-model="list1.newItem">
-		<p><label>Quantity</label> <input type="text" ng-model="list1.newQty">
-		<p><button ng-click="list1.addItem()">Add item</button>
-	</div>
-
-	<div ng-controller="shoppingList2Controller as list2">
-		
-		<h2>Shopping list 2</h2>
-
-		<ol>
-			<li ng-repeat="item in list2.shoppingList">Fetch ({{item.qty}}) {{item.name}}{{list2.multiplier(item.qty)}} <button ng-click="list2.removeItem($index)">Delete</button>
-		</ol>
-
-		<h3>Add item</h3>
-		<p><label>Item</label> <input type="text" ng-model="list2.newItem">
-		<p><label>Quantity</label> <input type="text" ng-model="list2.newQty">
-		<p><button ng-click="list2.addItem()">Add item</button>
+		<p><label>Item</label> <input type="text" ng-model="list.newItem">
+		<p><label>Quantity</label> <input type="text" ng-model="list.newQty">
+		<p><button ng-click="list.addItem()">Add item</button>
 	</div>
 
 </body>
