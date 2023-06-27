@@ -40,7 +40,7 @@
 				items.push(item);
 			}
 			else {
-				throw new Error("Max items (" + maxItems + ") reached, stop adding items!");
+				throw new Error("Max items (" + maxItems + ") reached, stop adding items or delete some items first.");
 			}
 		};
 		
@@ -63,22 +63,29 @@
 	
 	angular.module('shoppingList', [])
 	.controller('shoppingListController', shoppingListController)
-	.factory('shoppingListFactory', shoppingListFactory);
+	.provider('shoppingListService', shoppingListServiceProvider)
+	.config(Config);
 	
-	shoppingListController.$inject = ['shoppingListFactory'];
-	function shoppingListController(shoppingListFactory) {
+	Config.$inject = ['shoppingListServiceProvider'];
+	function Config(shoppingListServiceProvider) {
+		shoppingListServiceProvider.config.maxItems = 4;
+	}
+
+	shoppingListController.$inject = ['shoppingListService'];
+	function shoppingListController(shoppingListService) {
 		var ctrl = this;
-		var service = shoppingListFactory(undefined, 'list1');
 		
-		service.init();
-		ctrl.shoppingList = service.getItems();
+		ctrl.errorMessage = '';
+		
+		shoppingListService.init();
+		ctrl.shoppingList = shoppingListService.getItems();
 		
 		ctrl.multiplier = function(val) {
 			if (val > 1) { return 's'; }
 		};
 		
 		ctrl.removeItem = function(idx) {
-			service.removeItem(idx); 
+			shoppingListService.removeItem(idx); 
 		};
 
 		ctrl.newItem = '';
@@ -86,9 +93,12 @@
 		
 		ctrl.addItem = function(){
 			if ( ctrl.newItem !== '') {
-				if (ctrl.newQty === '') { ctrl.newQty = '1'; }
+				if (ctrl.newQty === '') { 
+					ctrl.newQty = '1'; 
+					ctrl.errorMessage = '';
+				}
 				try {
-					service.addItem(ctrl.newItem, ctrl.newQty);
+					shoppingListService.addItem(ctrl.newItem, ctrl.newQty);
 				} catch (error) {
 					ctrl.errorMessage = error.message;
 				}
@@ -96,11 +106,18 @@
 		}
 	}
 	
-	function shoppingListFactory() {
-		var factory = function(maxItems) {
-			return new shoppingListService(maxItems);
-		};
+	function shoppingListServiceProvider() {
+		var provider = this;
 		
-		return factory;
+		provider.config = {
+			maxItems: 6
+		};
+
+		// This is the factory.
+		provider.$get = function () {
+			var service = new shoppingListService(provider.config.maxItems);
+			return service;
+		};
 	}
+		
 })()

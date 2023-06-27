@@ -15,15 +15,20 @@
 		
 		<h2>Shopping list</h2>
 
-		<ul>
+		<ol>
 			<li ng-repeat="item in list.shoppingList | filter: filterItems">{{item.name}}{{list.multiplier(item.qty)}} ({{item.qty}}) <button ng-click="list.removeItem($index)">Delete</button>
-		</ul>
+		</ol>
+		
 		<p>List filter: <input type="text" ng-model="filterItems">
-		<div class="msg">{{list.errorMessage}}</div>
+		
+		<div class="msg" ng-show="list.errorMessage !== ''">Error: {{list.errorMessage}}</div>
 
 		<h3>Add item</h3>
+		
 		<p><label>Item</label> <input type="text" ng-model="list.newItem">
+		
 		<p><label>Quantity</label> <input type="text" ng-model="list.newQty">
+		
 		<p><button ng-click="list.addItem()">Add item</button>
 	</div>
 
