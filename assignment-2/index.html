@@ -25,6 +25,7 @@
 		<ul ng-show="buy.itemList.length > 0">
 			<li ng-repeat="item in buy.itemList"> {{item.name}}, {{item.qty}} <button ng-click="buy.buyItem($index)">Bought</button>
 		</ul>
+		
 	</div>
 
 	<div id="list-bought" class="col2" ng-controller="AlreadyBoughtController as bought">
@@ -35,6 +36,8 @@
 		<ul ng-show="bought.itemList.length > 0">
 			<li ng-repeat="item in bought.itemList"> {{item.name}}, {{item.qty}}
 		</ul>
+
+		<p>Items bought: {{bought.service.counter}}
 	</div>
 </div>
 

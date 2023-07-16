@@ -14,6 +14,7 @@
 		
 		b.buyItem = function(e) {
 			ShoppingListCheckOffService.buyItem(e);
+			ShoppingListCheckOffService.counter++;
 		};
 	};
 	
@@ -21,7 +22,9 @@
 	function AlreadyBoughtController(ShoppingListCheckOffService) {
 		var b = this; 
 
-		b.itemList = ShoppingListCheckOffService.boughtList;		
+		b.itemList = ShoppingListCheckOffService.boughtList;
+
+		b.service = ShoppingListCheckOffService;
 	};
 	
 	function ShoppingListCheckOffService() {
@@ -48,6 +51,8 @@
 			else {
 				console.log('Item does not exist.');
 			}
-		};			
+		};
+
+		this.counter = 0;
 	};
 })();
