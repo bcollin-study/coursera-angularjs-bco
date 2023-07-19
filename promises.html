@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="shoppingList">
+<head>
+	<meta charset="utf-8">
+	<title>Promises</title>
+	<script src="angular.min.js"></script>
+	<script src="promises.js"></script>
+</head>
+
+<body>
+
+	<h1>Promises</h1>
+	
+	<div ng-controller="shoppingListController as list">
+		
+		<h2>Snack shopping list</h2>
+		
+		<p>Only whitelisted products are allowed. <span ng-if="list.whiteList.length > 0">Whitelisted items are: <span ng-repeat="whiteListItem in list.whiteList" ng-click="list.addWhitelistedItem($index)">{{whiteListItem}}, </span>.</span>
+		
+		<p><input type="text" ng-model="list.newItem"> <button ng-click="list.addItem()">Add new item</button>
+	
+		<div ng-if="list.error !== ''" style="font-weight: bold; color: #900;">
+			{{list.error}}
+		</div>
+
+		<ol>
+			<li ng-repeat="item in list.itemList track by $index">{{item}} <button ng-click="list.copyItem($index)">Copy</button> <button ng-click="list.removeItem($index)">Remove</button>
+		</ol>
+
+	</div> <!-- /@shoppingListController -->
+
+</body>
+</html>
