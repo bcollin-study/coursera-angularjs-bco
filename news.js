@@ -9,7 +9,8 @@
 	
 	function commentsDirective() {
 		var ddo = {
-			templateUrl: 'comments-template.html'
+			templateUrl: 'comments-template.html',
+			restrict: 'E'
 		};
 		
 		return ddo;
@@ -21,7 +22,8 @@
 				<h3>{{item.title}}</h3> 
 				
 				<div class=\"story\">{{item.story}}</div>
-			`
+			`,
+			restrict: 'E'
 		};
 		return ddo;
 	};
@@ -61,8 +63,10 @@
 		};
 		
 		sv.addComment = function(idx, comment) {
-			var commentObj = {text: comment, date: Date()};
-			sv.news.items[idx].comments.push(commentObj);
+			if (sv.news.items[idx] !== undefined && comment !== undefined && comment !== '') {
+				var commentObj = {text: comment, date: Date()};
+				sv.news.items[idx].comments.push(commentObj);
+			}
 		};
 	};
 
