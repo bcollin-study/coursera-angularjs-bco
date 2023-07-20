@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html ng-app="newsApp">
+<head>
+  <meta charset="UTF-8">
+  <title>News</title>
+  <script src="angular.min.js"></script>
+  <script src="news.js"></script>
+</head>
+
+<body>
+
+<h1>Stories</h1>
+
+<div class="story" ng-controller="newsController as news">
+
+	<div ng-repeat="item in news.news.items">
+		<news-item></news-item>
+		
+		<h3>Comments</h3>
+		<input ng-model="news.newComment[$index]"> <button ng-click="news.addComment($index)">Add</button>
+		<ul>
+			<comments ng-repeat="comment in item.comments"></comments>
+		</ul>
+		
+	</div>
+
+</div>
+
+<script>
+</script>
+
+</body>
+</html>
