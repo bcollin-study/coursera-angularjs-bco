@@ -3,6 +3,7 @@
 
 	angular.module('newsApp', [])
 	.controller('newsController', newsController)
+	.controller('oldsController', oldsController)
 	.service('newsService', newsService)
 	.directive('newsItem', newsItemDirective)
 	.directive('comments', commentsDirective);
@@ -19,9 +20,10 @@
 	function newsItemDirective() {
 		var ddo = {
 			template: `
-				<h3>{{item.title}}</h3> 
+				{{poep}}
+				<h3>{{story.title}}</h3> 
 				
-				<div class=\"story\">{{item.story}}</div>
+				<div class=\"story\">{{story.story}}</div>
 			`,
 			restrict: 'E'
 		};
@@ -31,13 +33,34 @@
 	newsController.$inject = ['newsService'];
 	function newsController(newsService){
 		var ct = this;
-		ct.news = newsService.news;
+		ct.news = newsService.news.items[0];
+		ct.title = ct.news.title;
+		ct.story = ct.news.story;
+		ct.comments = ct.news.comments;
 		
-		ct.newComment = [];
+		ct.poep = 'poep';
 		
-		ct.addComment = function(idx) {
-			newsService.addComment(idx, ct.newComment[idx]);
-			ct.newComment[idx] = '';
+		ct.newComment = '';
+		
+		ct.addComment = function() {
+			newsService.addComment(0, ct.newComment);
+			ct.newComment = '';
+		}
+	};
+	
+	oldsController.$inject = ['newsService'];
+	function oldsController(newsService){
+		var ct = this;
+		ct.news = newsService.news.items[1];
+		ct.title = ct.news.title;
+		ct.story = ct.news.story;
+		ct.comments = ct.news.comments;
+		
+		ct.newComment = '';
+		
+		ct.addComment = function() {
+			newsService.addComment(1, ct.newComment);
+			ct.newComment = '';
 		}
 	};
 	

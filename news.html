@@ -11,19 +11,24 @@
 
 <h1>Stories</h1>
 
-<div class="story" ng-controller="newsController as news">
-
-	<div ng-repeat="item in news.news.items">
+<div class="story" ng-controller="newsController as story">
 		<news-item></news-item>
 		
 		<h3>Comments</h3>
-		<input ng-model="news.newComment[$index]"> <button ng-click="news.addComment($index)">Add</button>
+		<input ng-model="story.newComment"> <button ng-click="story.addComment()">Add</button>
 		<ul>
 			<comments></comments>
 		</ul>
-		
-	</div>
+</div>
 
+<div class="story" ng-controller="oldsController as story">
+		<news-item></news-item>
+		
+		<h3>Comments</h3>
+		<input ng-model="story.newComment"> <button ng-click="story.addComment()">Add</button>
+		<ul>
+			<comments></comments>
+		</ul>
 </div>
 
 <script>
