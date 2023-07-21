@@ -19,26 +19,30 @@
 	
 	function newsItemDirective() {
 		var ddo = {
+			scope: {
+				story: '=itemid',
+				title: '@heading' // just to demonstrate the diff between @ and =
+			},
 			template: `
-				{{poep}}
-				<h3>{{story.title}}</h3> 
+				<h3>{{title}}</h3> 
 				
-				<div class=\"story\">{{story.story}}</div>
+				<div class=\"story\">{{story.body}}</div>
 			`,
 			restrict: 'E'
 		};
 		return ddo;
 	};
 	
-	newsController.$inject = ['newsService'];
-	function newsController(newsService){
+	newsController.$inject = ['$scope', 'newsService'];
+	function newsController($scope, newsService){
 		var ct = this;
 		ct.news = newsService.news.items[0];
-		ct.title = ct.news.title;
-		ct.story = ct.news.story;
-		ct.comments = ct.news.comments;
-		
-		ct.poep = 'poep';
+		$scope.title = ct.news.title;
+		$scope.item = {
+			title: ct.news.title,
+			body: ct.news.story,
+			comments: ct.news.comments
+		};
 		
 		ct.newComment = '';
 		
@@ -46,15 +50,20 @@
 			newsService.addComment(0, ct.newComment);
 			ct.newComment = '';
 		}
+		
+		console.log(ct);
 	};
 	
-	oldsController.$inject = ['newsService'];
-	function oldsController(newsService){
+	oldsController.$inject = ['$scope', 'newsService'];
+	function oldsController($scope, newsService){
 		var ct = this;
 		ct.news = newsService.news.items[1];
-		ct.title = ct.news.title;
-		ct.story = ct.news.story;
-		ct.comments = ct.news.comments;
+		$scope.title = ct.news.title;
+		$scope.item = {
+			title: ct.news.title,
+			body: ct.news.story,
+			comments: ct.news.comments
+		};
 		
 		ct.newComment = '';
 		

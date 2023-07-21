@@ -1,1 +1,6 @@
-<li ng-repeat="comment in story.comments" class="comment comment-{{$index}}">{{comment.text}} <small>({{comment.date}})</small></li>
+<ul>
+	<li ng-repeat="comment in item.comments" class="comment comment-{{$index}}">
+		{{comment.text}} <small>({{comment.date}})</small>
+		<script>console.log('test');</script>
+	</li>
+</ul>

@@ -11,24 +11,20 @@
 
 <h1>Stories</h1>
 
-<div class="story" ng-controller="newsController as story">
-		<news-item></news-item>
+<div class="story" ng-controller="newsController">
+		<news-item itemid="item" heading="{{title}}"></news-item>
 		
 		<h3>Comments</h3>
-		<input ng-model="story.newComment"> <button ng-click="story.addComment()">Add</button>
-		<ul>
-			<comments></comments>
-		</ul>
+		<input ng-model="newComment"> <button ng-click="addComment()">Add</button>
+		<comments></comments>
 </div>
 
-<div class="story" ng-controller="oldsController as story">
-		<news-item></news-item>
+<div class="story" ng-controller="oldsController">
+		<news-item itemid="item" heading="{{title}}"></news-item>
 		
 		<h3>Comments</h3>
 		<input ng-model="story.newComment"> <button ng-click="story.addComment()">Add</button>
-		<ul>
-			<comments></comments>
-		</ul>
+		<comments></comments>
 </div>
 
 <script>
