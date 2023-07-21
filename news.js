@@ -24,14 +24,35 @@
 				title: '@heading' // just to demonstrate the diff between @ and =
 			},
 			template: `
-				<h3>{{title}}</h3> 
+				<h3>{{clist.title}}</h3> 
 				
-				<div class=\"story\">{{story.body}}</div>
+				<div class=\"story\">{{clist.story.body}}</div>
+				
+				<div class=\"error\" ng-if="clist.hasBroSayer()">Disclosure, some of the commenters may be related to the author.</div>
 			`,
-			restrict: 'E'
+			restrict: 'E',
+			
+			controller: newsItemDirectiveController,
+			controllerAs: 'clist',
+			bindToController: true
 		};
 		return ddo;
 	};
+	
+	function newsItemDirectiveController() {
+		var ct = this;
+		
+		ct.hasBroSayer = function() {
+			var found = false;
+			for (var key in ct.story.comments) {
+				var locas = ct.story.comments[key].text.toLowerCase();
+				if (locas.indexOf('bro') >= 0) { 
+					found = true; 
+				}
+			}
+			return found;
+		};
+	}
 	
 	newsController.$inject = ['$scope', 'newsService'];
 	function newsController($scope, newsService){
