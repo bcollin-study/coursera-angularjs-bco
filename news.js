@@ -64,7 +64,8 @@
 		
 		sv.addComment = function(idx, comment) {
 			if (sv.news.items[idx] !== undefined && comment !== undefined && comment !== '') {
-				var commentObj = {text: comment, date: Date()};
+				var now = new Date();
+				var commentObj = {text: comment, date: now.toISOString().substr(0,10)};
 				sv.news.items[idx].comments.push(commentObj);
 			}
 		};
